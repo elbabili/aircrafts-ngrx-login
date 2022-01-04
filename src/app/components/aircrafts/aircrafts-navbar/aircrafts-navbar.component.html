@@ -1,0 +1,22 @@
+
+<nav class = "navbar navbar-expand-sm bg-dark navbar-dark">
+    <ul class="navbar-nav">
+        <li>
+            <button class="btn btn-outline-info m-2 btn-sm" (click)="getAllAircrafts()">Aircrafts</button>    
+            <button class="btn btn-outline-info m-2 btn-sm" (click)="getDesignAircrafts()">Design</button>
+            <button class="btn btn-outline-info m-2 btn-sm" (click)="getDeveloppementAircrafts()">Development</button>
+        </li>
+    </ul>    
+
+    <ul class="navbar-nav ms-auto">
+        <li>
+            <form #f="ngForm" (ngSubmit)="onSearch(f.value)" class="form-inline">
+                   <input type="text" ngModel name ="keyword"> 
+                   <button type="submit" class="btn btn-outline-info btn-sm"> 
+                    <i class="fa fa-search"></i> 
+                        Search
+                    </button>
+            </form>
+        </li>
+    </ul>
+</nav>

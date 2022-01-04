@@ -1,0 +1,19 @@
+<div>
+    <ng-container *ngIf="alertAircfrats$ | async as aircrafts">           
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Id</th> <th>Program</th> <th>Design</th> <th>Development</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-danger">
+                        <tr *ngFor="let aircraft of aircrafts">
+                            <td>{{aircraft.id}}</td>
+                            <td>{{aircraft.prog}}</td>    
+                            <td>{{aircraft.design}}</td>
+                            <td>{{aircraft.development}}</td>
+                        </tr>
+                    </tbody>
+            </table>    
+    </ng-container>
+</div>
