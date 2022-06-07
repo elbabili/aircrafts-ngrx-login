@@ -1,0 +1,37 @@
+<div class="container" style="padding-top: 15px;" >
+    <div class="card" style="max-width: 300px;">
+        <div class="card-header">Authentification</div>  
+        <div class="card-body">
+            <form [formGroup]="myForm" (ngSubmit)="onLogin(myForm)">
+                <div class="form-group">
+                    <label class="control-label">email : </label>
+                    <input type="text" formControlName="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label class="control-label">password : </label>
+                    <input type="password" formControlName="pwd" class="form-control">
+                </div>     
+                <button style=margin-top:10px; type="submit" class="btn btn-primary">Connexion</button>    
+                <div class="text-danger"> {{error}}</div>     
+            </form>
+        </div>
+    <div>
+        <ng-container *ngIf="aircraftsState$ | async as state" [ngSwitch]="state.loginState">
+            <ng-container *ngSwitchCase="loginStateEnum.INITIAL">
+                <div class="p-2"> let's go !</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="loginStateEnum.REQUEST_LOGIN">
+                <div class="p-2"> Login</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="loginStateEnum.RESPONSE_LOGIN_OK">
+                <div class="p-2" > Welcome </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="loginStateEnum.ERROR">
+                <div class="p-2 text-danger"> {{state.errorMessage}}</div>
+            </ng-container>
+            <ng-container *ngSwitchCase="loginStateEnum.RESPONSE_LOGIN_DENIED">
+                <div class="p-2 text-danger"> Accès non authorisé</div>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

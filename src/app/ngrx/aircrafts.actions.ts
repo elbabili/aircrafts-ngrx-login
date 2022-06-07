@@ -1,5 +1,7 @@
 import { Action } from "@ngrx/store";
 import { Aircraft } from "../model/aircraft.model";
+import { Operation } from "../model/operation.model";
+import { User } from "../model/user.model";
 
 export enum AircraftsActionsTypes{
     //Action : Get all aircrafts 
@@ -21,7 +23,8 @@ export enum AircraftsActionsTypes{
     //Action : Search aircrafts
     SEARCH_AIRCRAFTS = "[Aircrafts] Search Aircrafts",
     SEARCH_AIRCRAFTS_SUCCESS = "[Aircrafts] Search Aircrafts Success",
-    SEARCH_AIRCRAFTS_ERROR = "[Aircrafts] Search Aircrafts Error",  
+    SEARCH_AIRCRAFTS_ERROR = "[Aircrafts] Search Aircrafts Error",   
+    
 }
 
 //Get all aircrafts
@@ -75,7 +78,7 @@ export class GetDevelopmentAircraftsActionError implements Action {
     }   
 }
 
-//Get Development aircrafts
+//Get Search aircrafts
 export class SearchAircraftsAction implements Action {
     type: AircraftsActionsTypes = AircraftsActionsTypes.SEARCH_AIRCRAFTS;
     constructor(public payload:string) {   
@@ -95,4 +98,24 @@ export class SearchAircraftsActionError implements Action {
 export type AircraftsActions = GetAllAircraftsAction | GetAllAircraftsActionSuccess | GetAllAircraftsActionError | 
 GetDesignedAircraftsAction | GetDesignedAircraftsActionSuccess | GetDesignedAircraftsActionError |
 GetDevelopmentAircraftsAction | GetDevelopmentAircraftsActionSuccess | GetDevelopmentAircraftsActionError |
-SearchAircraftsAction | SearchAircraftsActionSuccess | SearchAircraftsActionError;
+SearchAircraftsAction | SearchAircraftsActionSuccess | SearchAircraftsActionError
+
+/*--------------------------------------------*/
+
+export enum OperationActionsTypes {
+    //Action : Operations
+    ADD_OPERATION = "[Operation] Add One",        //ajout d'une opération
+    REMOVE_OPERATION = "[Operation] Remove One",  //supprimer une opération
+}
+export class AddOperationAction implements Action {
+    type: OperationActionsTypes = OperationActionsTypes.ADD_OPERATION;
+    constructor(public payload:string) {   
+    }   
+}
+export class RemoveOperationAction implements Action {
+    type: OperationActionsTypes = OperationActionsTypes.REMOVE_OPERATION;
+    constructor(public payload:number) {   
+    }   
+}
+
+export type OperationsActions = AddOperationAction | RemoveOperationAction;

@@ -13,12 +13,12 @@ export class AircraftsNavbarComponent implements OnInit {
   ngOnInit(): void {
   }
   getAllAircrafts(){
-    //User a cliqué sur le bouton afficher tous les produits aussi il faut dispatcher l'action à l'aide du store
+    //User a cliqué sur le bouton afficher tous les avions aussi il faut dispatcher l'action à l'aide du store
     this.store.dispatch(new GetAllAircraftsAction({}));
-    //Le reducer et l'effect ont reçu la notification du Store et ils ont pris le relais chacun de son côté    
+    //Le reducer et l'effect ont reçu la notification du Store et ils ont pris le relais   
   }
   
-  getDesignAircrafts(){
+  getDesignedAircrafts(){
     this.store.dispatch(new GetDesignedAircraftsAction({}));
   }
 

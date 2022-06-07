@@ -12,13 +12,18 @@ import { AircraftsComponent } from './components/aircrafts/aircrafts.component';
 import { AircraftsEffects } from './ngrx/aircrafts.effects';
 import { AircraftsReducer } from './ngrx/aircrafts.reducer';
 import { AircraftsAlertComponent } from './components/aircrafts-alert/aircrafts-alert.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoginEffects } from './ngrx/login/login.effect';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AircraftsComponent,
     AircraftsNavbarComponent,
-    AircraftsAlertComponent
+    AircraftsAlertComponent,
+    LoginComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,7 @@ import { AircraftsAlertComponent } from './components/aircrafts-alert/aircrafts-
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forRoot({airbusState : AircraftsReducer}),   //spécifier le reducer
-    EffectsModule.forRoot([AircraftsEffects]),               //spécifier les effects
+    EffectsModule.forRoot([AircraftsEffects,LoginEffects]),               //spécifier les effects
     StoreDevtoolsModule.instrument()  //en l'activant ici, à chaque action de NgRx dans l'appli
                                       //le plugin redux (chrome) permet l'analyse du state durant le dev
   ],

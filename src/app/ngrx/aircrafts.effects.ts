@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Action } from "@ngrx/store";
 import { catchError, map, mergeMap, Observable, of } from "rxjs";
 import { AircraftService } from "../services/aircraft.service";
+import { AuthenticateService } from "../services/authenticate.service";
 import { AircraftsActions, AircraftsActionsTypes, GetAllAircraftsActionError, GetAllAircraftsActionSuccess, GetDesignedAircraftsActionError, GetDesignedAircraftsActionSuccess, GetDevelopmentAircraftsActionError, GetDevelopmentAircraftsActionSuccess, SearchAircraftsActionError, SearchAircraftsActionSuccess } from "./aircrafts.actions";
 
 @Injectable()  //décorateur spéficie qu'il s'agit d'un service
 export class AircraftsEffects {
-    constructor(private aircraftService: AircraftService, private effectActions: Actions) {
+    constructor(private aircraftService: AircraftService, private effectActions: Actions , private authService : AuthenticateService) {
     }
 
     getAllAircraftsEffect: Observable<AircraftsActions> = createEffect(     //nous souhaitons créer un effect ici sous condition, donc on écoute les actions        
@@ -19,7 +19,7 @@ export class AircraftsEffects {
                     //dont le payload est la liste des avions
                     //l'action une fois émise va être traité par le Reducer
                     //case AircraftsActionsTypes.GET_ALL_AIRCRAFTS_SUCCESS:
-                    catchError((err) => of(new GetAllAircraftsActionError(err.message)))     //s'il y a erreur, génération d'une autre action
+                    catchError((err) => of(new GetAllAircraftsActionError(err.message))) //s'il y a erreur, génération d'une autre action
                 )
             })
         )

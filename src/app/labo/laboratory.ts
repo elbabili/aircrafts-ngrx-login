@@ -1,5 +1,7 @@
 import { filter, from, map, Observable, of, tap } from 'rxjs';
 
+import { Aircraft } from '../model/aircraft.model';
+
 export class Laboratory {
 
   //fonction classique
@@ -78,5 +80,6 @@ export class Laboratory {
     ob$.subscribe(
         value => console.log(value)
     );
+
   }
 }

@@ -5,6 +5,12 @@
       {"id": 3,"prog": "A380","design": true,"development": true},
       {"id": 4,"prog": "A400M","design": false,"development": false},
       {"id": 5,"prog": "A330","design": true,"development": true}
+    ],
+
+    "users" : [
+      {"email" : "elbab@gmail.com" , "pwd" : "1234"},
+      {"email" : "pierre@gmail.com" , "pwd" : "123"},
+      {"email" : "elbab@gmail.com" , "pwd" : "123"}
     ]
   }
   
