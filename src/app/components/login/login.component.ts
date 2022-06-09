@@ -48,3 +48,18 @@ export class LoginComponent implements OnInit {
     }
   }
 }
+
+
+/*
+- Réalisation d'un composant de connexion
+- Réalisation de l'action dispatché par celui-ci
+- modification du state selon les besoins
+- Mise en oeuvre du composant qui suit l'action 
+- Interception par le reducer
+- Interception par l'effect
+- ajouter dans le module le nouvel effect si fichier différent
+
+
+* ajout de la Gestion du Locale storage
+* solution à base de Guard + CanActivate
+*/
