@@ -15,6 +15,7 @@ import { AircraftsAlertComponent } from './components/aircrafts-alert/aircrafts-
 import { LoginComponent } from './components/login/login.component';
 import { LoginEffects } from './ngrx/login/login.effect';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { AircraftComponent } from './components/aircraft/aircraft.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AircraftsNavbarComponent,
     AircraftsAlertComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AircraftComponent
   ],
   imports: [
     BrowserModule,

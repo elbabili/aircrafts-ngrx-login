@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
+import { Laboratory } from './labo/laboratory';
 import { User } from './model/user.model';
 import { selectIsConnected } from './ngrx/aircrafts.selectors';
 import { AircraftsState, LoginStateEnum } from './ngrx/aircrafts.state';
@@ -19,6 +20,7 @@ export class AppComponent {
     
   constructor(private store:Store<any>, private router: Router) {
     this.isConnected$ = store.select(selectIsConnected);
+    //new Laboratory().tests();
   }
 
   ngOnInit(): void { 

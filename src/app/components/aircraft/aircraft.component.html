@@ -1,0 +1,50 @@
+<div>
+        <ng-container *ngIf="aircraftsState$ | async as state" [ngSwitch]="state.dataState">
+                <ng-container *ngSwitchCase="aircraftsStateEnum.INITIAL">
+                    <div class="p-2"> Initial State</div>
+                </ng-container>
+                <ng-container *ngSwitchCase="aircraftsStateEnum.LOADING">
+                    <div class="p-2"> Loading</div>
+                </ng-container>
+                <ng-container *ngSwitchCase="aircraftsStateEnum.ERROR">
+                    <div class="p-2 text-danger"> {{state.errorMessage}}</div>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="aircraftsStateEnum.LOADED">     
+                    <form #f="ngForm" (ngSubmit)="onUpdateAircraft(f.value)">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label class="control-label">Id : </label>
+                                        <input type="text" name="aircraft.id" class="form-control" readonly [(ngModel)]="aircraft.id">
+                                    </div>                                      
+                                </div>
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        <label class="control-label">Prog : </label>
+                                        <input type="text" name="aircraft.prog" class="form-control" readonly [(ngModel)]="aircraft.prog">
+                                    </div> 
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class="col-md-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="aircraft.design" [(ngModel)]="aircraft.design">
+                                        <label class="form-check-label" for="aircraft.design"> Design </label>
+                                    </div>   
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="aircraft.development" [(ngModel)]="aircraft.development">
+                                        <label class="form-check-label" for="aircraft.development"> Development </label>
+                                    </div>   
+                                </div>
+                            </div>
+
+                            <div class = "row">
+                            </div>     
+                            <button type="submit" class="btn btn-primary">Update</button> 
+                        </div>                          
+                    </form>
+                </ng-container>
+        </ng-container>
+</div>

@@ -13,13 +13,13 @@ import { selectAlertAircrafts } from 'src/app/ngrx/aircrafts.selectors';
 export class AircraftsAlertComponent implements OnInit {
 
   alertAircfrats$: Observable<Aircraft[]> | null = null;
-  labo : Laboratory = new Laboratory();
+  //labo : Laboratory = new Laboratory();
 
   constructor(private store: Store<any>) {
     this.alertAircfrats$ = store.select(selectAlertAircrafts);
   }
 
   ngOnInit(): void {
-    this.labo.tests();
+    //this.labo.tests();
   }
 }

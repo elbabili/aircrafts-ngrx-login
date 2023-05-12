@@ -12,7 +12,7 @@ export enum LogoutActionsTypes {
 //Logou action
 export class LogoutAction implements Action {
     type: LogoutActionsTypes = LogoutActionsTypes.LOGOUT;          
-    constructor(){
+    constructor() {
     }
 }
 export class LogoutActionSuccess implements Action {

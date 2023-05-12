@@ -23,8 +23,10 @@ export interface AircraftsState extends EntityState<Operation> {    //structure 
     dataState : AircraftsStateEnum,   //état du state s'agissant des avions
     loginState : LoginStateEnum,      //état du state s'agissant de l'authentification
     userConnected : User,             //utilisateur connecté
-    isConnected : Boolean
+    isConnected : boolean,
+    aircraft : Aircraft
 }
+
 //il est nécessaire de définir l'état initial du state avec des valeurs par défaut
 export const initState : AircraftsState = {
     aircrafts: [],
@@ -34,5 +36,6 @@ export const initState : AircraftsState = {
     userConnected : {} as User,
     isConnected : false,
     ids: [],
-    entities: {}
+    entities: {},
+    aircraft: {} as Aircraft
 }

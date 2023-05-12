@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
     this.aircraftsState$ = this.store.pipe(
       map((state) => { 
         if(state.airbusState.isConnected) {
-          //injection des données dans le locale storage
           this.route.navigateByUrl('aircrafts');
         }
         return state.airbusState;

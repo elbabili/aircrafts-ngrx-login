@@ -34,7 +34,7 @@ export class AircraftService {
   }
 
   //renvoi la liste d'avions contenant le mot clé
-  public searchAircrafts(keyword:string) : Observable<Aircraft[]> {
+  public getAircraftsByKeyword(keyword:string) : Observable<Aircraft[]> {
     return this.http.get<Aircraft[]>(environment.host + "/aircrafts?prog_like=" + keyword)
   }
 }

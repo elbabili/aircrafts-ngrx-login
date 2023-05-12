@@ -21,7 +21,7 @@ export class Laboratory {
     this.classique();
     this.somme(5, 7); // 12 -> affiche rien !
     console.log(this.sum(10, 20));  // 30
-    this.display(); // hello
+    this.display(); // hello world
 
     const numbers = [1, 2, 3, 4, 5, 6];
     const mod = numbers.filter((value) => (value % 2) === 0); //filter renvoi un tableau avec les valeurs qui valident la condition
@@ -38,39 +38,41 @@ export class Laboratory {
     ];
     //les 2 approches renvoient dans un tableau le nombre de caractères par ligne de notre tableau tab
     let tab2 = tab.map(function (s) { return s.length }); //sans les fonctions fléchées
-    let tab3 = tab.map(s => s.length); // avec ... moins verbeux n'est-ce pas ? faut juste s'habituer
+    let val = tab.map(s => s.length); // avec ... moins verbeux n'est-ce pas ? faut juste s'habituer
+    console.log("nombre de caractères par lignes dans le tableau : \n" + tab + " est " + val)
 
     //Surcharge de fonction ... 
 
     //Les Observables
-    const data$ = new Observable(observer => { // on définit ici un observable (qui peut être observé)
-      observer.next('first call' + counter++);   //voici l'appel qui sera sollicitée par les observateurs ayant souscrit
+    const data$ = new Observable( sub => { // on définit ici un observable (qui peut être observé)
+      sub.next('first call' + counter++);   //voici l'appel qui sera sollicitée par les observateurs ayant souscrit
       setTimeout(() => {
-        observer.next('second call' + counter++); //2ème appel 5 secondes plutard ...
+        sub.next('second call' + counter++); //2ème appel 5 secondes plutard ...
       }, 5000);
     });
 
     let counter = 0;
     const observer1 = data$.subscribe({   //l'observateur1 souscrit à l'observable et gère 2 cas :
-      next: value => console.log('1-' + value),  //chaque fois qu'une valeur est émise par l'observable, il l'affiche
+      next: (value) => console.log('1-' + value),  //chaque fois qu'une valeur est émise par l'observable, il l'affiche
       error: err => console.log('1-' + err),     //affichage en cas d'erreur
-    });
+    }); //du coup, pour chaque valeur émise par l'observable 'next' => on l'affiche à partir de l'observateur
 
     //et puis un autre observateur sur le même Observable
     data$.subscribe((value) => {
-      console.info('2--' + value);
+      console.log('2--' + value);
     });
 
     //création d'un observable à partir d'un tableau de string
     const dataTable$ = from(['monday','tuesday','wednesday', 'thursday' , 'friday' , 'saturday' , 'sunday']);
     dataTable$.subscribe(val => console.log(val));  //soucription à celui-ci
+    //pour chaque string observé, on l'affiche !
 
-    //voilà donc un tuyau qui permet d'appliquer plusieurs traitement via les opérateurs tap, map, ...
+    //voilà un tuyau qui permet d'appliquer plusieurs traitement via les opérateurs tap, map, ...
     //chaque opérateur ou fonction renvoi un observable qui sera traité par l'opérateur suivant
     data$.pipe(
       tap(item => console.log('3---' +item)),     //1ère affichage + renvoi de la source
-      map(dat => dat + ' end')                    //map : renvoi un observable avec chaque donnée transformée
-    ).subscribe(                   //soucription à celui-ci        
+      map(dat => dat + ' end')                    //map : renvoi un observable avec chaque donné transformée
+    ).subscribe(                   //souscription à celui-ci        
       dis => console.log('hi ' + dis)
     );
 
@@ -80,6 +82,5 @@ export class Laboratory {
     ob$.subscribe(
         value => console.log(value)
     );
-
   }
 }

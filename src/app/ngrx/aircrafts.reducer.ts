@@ -6,6 +6,7 @@ import { Operation } from "../model/operation.model";
 import { User } from "../model/user.model";
 import { LoginActionsTypes } from "./login/login.action";
 import { LogoutActionsTypes } from "./login/logout.action";
+import { Aircraft } from "../model/aircraft.model";
 
 export const adapter: EntityAdapter<Operation> = createEntityAdapter<Operation>({
     //on a besoin d'un adapter afin de manipuler nos entités avec un certain nombre de méthodes
@@ -21,7 +22,8 @@ export const initialState: AircraftsState = adapter.getInitialState({
     userConnected: {} as User,
     isConnected : false,
     ids: [],
-    entities: {}
+    entities: {},
+    aircraft: {} as Aircraft
 });
 
 export function AircraftsReducer(state : AircraftsState = initialState, action:Action) : AircraftsState {   
@@ -33,6 +35,16 @@ export function AircraftsReducer(state : AircraftsState = initialState, action:A
             return {...state, dataState:AircraftsStateEnum.LOADED, aircrafts:(<AircraftsActions> action).payload}
             // renvoi clone + nouveau dataState + liste des avions en base contenu dans le payload
         case AircraftsActionsTypes.GET_ALL_AIRCRAFTS_ERROR : 
+            return {...state, dataState:AircraftsStateEnum.ERROR, errorMessage:(<AircraftsActions> action).payload}
+
+        //Get Aircraft By Id
+        case AircraftsActionsTypes.GET_AIRCRAFT_BY_ID:     
+            return {...state, dataState:AircraftsStateEnum.LOADING }   
+        case AircraftsActionsTypes.GET_AIRCRAFT_BY_ID_SUCCESS: 
+        // Action a été reçu par l'effect qui a fait une demande en base, reçoit les datas et génère l'action pour indiquer que tout est ok
+            return {...state, dataState:AircraftsStateEnum.LOADED, aircraft:(<AircraftsActions> action).payload}
+        // renvoi clone + nouveau dataState + avion en base contenu dans le payload
+        case AircraftsActionsTypes.GET_AIRCRAFT_BY_ID_ERROR : 
             return {...state, dataState:AircraftsStateEnum.ERROR, errorMessage:(<AircraftsActions> action).payload}
         
         // Get Designed Aircrafts
@@ -63,7 +75,7 @@ export function AircraftsReducer(state : AircraftsState = initialState, action:A
         case OperationActionsTypes.ADD_OPERATION :
             return adapter.addOne((<AircraftsActions> action).payload, state);
         case OperationActionsTypes.REMOVE_OPERATION :
-            return adapter.removeOne((<AircraftsActions> action).payload, state);
+            return adapter.removeOne((<AircraftsActions> action).payload.id, state);
 
          // Login ou demande d'authenfication
         case LoginActionsTypes.LOGIN :

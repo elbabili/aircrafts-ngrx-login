@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, Observable, of } from "rxjs";
 import { AircraftService } from "../services/aircraft.service";
 import { AuthenticateService } from "../services/authenticate.service";
-import { AircraftsActions, AircraftsActionsTypes, GetAllAircraftsActionError, GetAllAircraftsActionSuccess, GetDesignedAircraftsActionError, GetDesignedAircraftsActionSuccess, GetDevelopmentAircraftsActionError, GetDevelopmentAircraftsActionSuccess, SearchAircraftsActionError, SearchAircraftsActionSuccess } from "./aircrafts.actions";
+import { AircraftsActions, AircraftsActionsTypes, GetAircraftByIdActionError, GetAircraftByIdActionSuccess, GetAllAircraftsActionError, GetAllAircraftsActionSuccess, GetDesignedAircraftsActionError, GetDesignedAircraftsActionSuccess, GetDevelopmentAircraftsActionError, GetDevelopmentAircraftsActionSuccess, SearchAircraftsActionError, SearchAircraftsActionSuccess } from "./aircrafts.actions";
 
 @Injectable()  //décorateur spéficie qu'il s'agit d'un service
 export class AircraftsEffects {
@@ -53,9 +53,21 @@ export class AircraftsEffects {
         () => this.effectActions.pipe(
             ofType(AircraftsActionsTypes.SEARCH_AIRCRAFTS),
             mergeMap((action: AircraftsActions) => {
-                return this.aircraftService.searchAircrafts(action.payload).pipe(
+                return this.aircraftService.getAircraftsByKeyword(action.payload).pipe(
                     map((aircrafts) => new SearchAircraftsActionSuccess(aircrafts)),
                     catchError((err) => of(new SearchAircraftsActionError(err.message)))
+                )
+            })
+        )
+    );
+
+    getAircraftByIdEffect: Observable<AircraftsActions> = createEffect(
+        () => this.effectActions.pipe(
+            ofType(AircraftsActionsTypes.GET_AIRCRAFT_BY_ID),
+            mergeMap((action: AircraftsActions) => {
+                return this.aircraftService.getAircraftById(action.payload).pipe(
+                    map((aircraft) => new GetAircraftByIdActionSuccess(aircraft)),
+                    catchError((err) => of(new GetAircraftByIdActionError(err.message)))
                 )
             })
         )

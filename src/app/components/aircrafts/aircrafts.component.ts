@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable, tap } from 'rxjs';
+import { Aircraft } from 'src/app/model/aircraft.model';
+import { GetAircraftByIdAction } from 'src/app/ngrx/aircrafts.actions';
 import { selectCountAlertAircrafts, selectIsConnected } from 'src/app/ngrx/aircrafts.selectors';
 import { AircraftsState, AircraftsStateEnum } from 'src/app/ngrx/aircrafts.state';
 
@@ -15,7 +18,7 @@ export class AircraftsComponent implements OnInit {
   countAlertAircfrats$ : Observable<number> | undefined;
   isConnected$: Observable<Boolean> | null = null;
   
-  constructor(private store:Store<any>) {  
+  constructor(private store:Store<any>, private router : Router) {  
     this.countAlertAircfrats$ = store.select(selectCountAlertAircrafts);
     this.isConnected$ = store.select(selectIsConnected);
   }
@@ -26,5 +29,10 @@ export class AircraftsComponent implements OnInit {
           //tap((state) => console.log(state) ),  // affiche > {airbusState: {…}} et le renvoi
           map((state) => state.airbusState)  //map renvoi airbusState: {…} de type AircraftsState {...}
     );  
+  }
+
+  onDetailAircraft(aircraft : Aircraft){
+    this.store.dispatch(new GetAircraftByIdAction(aircraft.id));
+    this.router.navigateByUrl('aircraft/' + aircraft.id);
   }
 }
