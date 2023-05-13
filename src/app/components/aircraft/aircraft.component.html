@@ -11,16 +11,16 @@
                 </ng-container>
 
                 <ng-container *ngSwitchCase="aircraftsStateEnum.LOADED">     
-                    <form #f="ngForm" (ngSubmit)="onUpdateAircraft(f.value)">
+                    <form #f="ngForm" (ngSubmit)="onUpdateAircraft(f.value,state)">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-1">
+                                <div class="col-md-1 mt-3">
                                     <div class="form-group">
                                         <label class="control-label">Id : </label>
                                         <input type="text" name="aircraft.id" class="form-control" readonly [(ngModel)]="aircraft.id">
                                     </div>                                      
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-md-1 mt-3">
                                     <div class="form-group">
                                         <label class="control-label">Prog : </label>
                                         <input type="text" name="aircraft.prog" class="form-control" readonly [(ngModel)]="aircraft.prog">
@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <div class = "row">
-                                <div class="col-md-1">
+                                <div class="col-md-1 mt-3">
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="aircraft.design" [(ngModel)]="aircraft.design">
                                         <label class="form-check-label" for="aircraft.design"> Design </label>
@@ -41,8 +41,31 @@
                             </div>
 
                             <div class = "row">
+                                <div class="col-md-6 mt-3 mr-3">
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th> <th>Name</th> <th>categorie</th> <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let equipment of state.equipments">
+                                                <td>{{equipment.id}}</td>
+                                                <td>{{equipment.name}}</td>    
+                                                <td>{{equipment.category}}</td>
+                                                <td>{{equipment.price}}</td>
+                                                <td> <a class="btn btn-outline-secondary m-2 btn-sm" (click)="onAddEquipement(equipment)">Add</a> </td>
+                                                <td> <a class="btn btn-outline-secondary m-2 btn-sm" (click)="onRemEquipement(equipment)">Rem</a> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>                                        
+                                </div>
+                                <div class="col-md-2 ms-auto mt-3">
+                                    <i class="fa fa-shopping-cart">...Achats en cours</i>                                    
+                                    <p>{{state.ids}}</p>
+                                </div>
                             </div>     
-                            <button type="submit" class="btn btn-primary">Update</button> 
+                            <button type="submit" class="btn btn-primary mt-3">Appliquer les changements</button> 
                         </div>                          
                     </form>
                 </ng-container>

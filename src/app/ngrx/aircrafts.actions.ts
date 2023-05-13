@@ -1,5 +1,6 @@
 import { Action } from "@ngrx/store";
 import { Aircraft } from "../model/aircraft.model";
+import { Equipment } from "../model/equipment.model";
 import { Operation } from "../model/operation.model";
 import { User } from "../model/user.model";
 
@@ -29,6 +30,11 @@ export enum AircraftsActionsTypes{
     GET_AIRCRAFT_BY_ID = "[Aircraft] Get Aircraft By Id",
     GET_AIRCRAFT_BY_ID_SUCCESS = "[Aircraft] Get Aircraft By Id Success",
     GET_AIRCRAFT_BY_ID_ERROR = "[Aircraft] Get Aircraft By Id Error",   
+
+    //Action : get equipments
+    GET_ALL_EQUIPMENTS = "[Equipments] Get All Equipments",
+    GET_ALL_EQUIPMENTS_SUCCESS = "[Equipments] Get All Equipments Success",
+    GET_ALL_EQUIPMENTS_ERROR = "[Equipments] Get All Equipments Error",    
 }
 
 //Get One aircraft By Id
@@ -46,6 +52,23 @@ export class GetAircraftByIdActionError implements Action{
     type: AircraftsActionsTypes = AircraftsActionsTypes.GET_AIRCRAFT_BY_ID_ERROR;
     constructor(public payload:string) {   
     }
+}
+
+//Get all Equipments
+export class GetAllEquipmentsAction implements Action{
+    type: AircraftsActionsTypes = AircraftsActionsTypes.GET_ALL_EQUIPMENTS;
+    constructor(public payload:any) {   
+    }
+}
+export class GetAllEquipmentsActionSuccess implements Action{
+    type: AircraftsActionsTypes = AircraftsActionsTypes.GET_ALL_EQUIPMENTS_SUCCESS;
+    constructor(public payload:Equipment[]) {
+    }
+}
+export class GetAllEquipmentsActionError implements Action{
+    type: AircraftsActionsTypes = AircraftsActionsTypes.GET_ALL_EQUIPMENTS_ERROR;
+    constructor(public payload:string) {   //message d'erreur
+    }   
 }
 
 //Get all aircrafts
@@ -119,8 +142,9 @@ export class SearchAircraftsActionError implements Action {
 export type AircraftsActions = GetAllAircraftsAction | GetAllAircraftsActionSuccess | GetAllAircraftsActionError | 
 GetDesignedAircraftsAction | GetDesignedAircraftsActionSuccess | GetDesignedAircraftsActionError |
 GetDevelopmentAircraftsAction | GetDevelopmentAircraftsActionSuccess | GetDevelopmentAircraftsActionError |
-SearchAircraftsAction | SearchAircraftsActionSuccess | SearchAircraftsActionError |
-GetAircraftByIdAction | GetAircraftByIdActionSuccess | GetAircraftByIdActionError
+SearchAircraftsAction  | SearchAircraftsActionSuccess  | SearchAircraftsActionError |
+GetAircraftByIdAction  | GetAircraftByIdActionSuccess  | GetAircraftByIdActionError |
+GetAllEquipmentsAction | GetAllEquipmentsActionSuccess | GetAllEquipmentsActionError
 
 /*--------------------------------------------*/
 
@@ -128,10 +152,11 @@ export enum OperationActionsTypes {
     //Action : Operations
     ADD_OPERATION = "[Operation] Add One",        //ajout d'une opération
     REMOVE_OPERATION = "[Operation] Remove One",  //supprimer une opération
+    REMOVE_ALL_OPERATION = "[Operation] Remove All Operation",  
 }
 export class AddOperationAction implements Action {
     type: OperationActionsTypes = OperationActionsTypes.ADD_OPERATION;
-    constructor(public payload:string) {   
+    constructor(public payload:Equipment) {   
     }   
 }
 export class RemoveOperationAction implements Action {
@@ -140,4 +165,10 @@ export class RemoveOperationAction implements Action {
     }   
 }
 
-export type OperationsActions = AddOperationAction | RemoveOperationAction;
+export class RemoveAllOperationAction implements Action {
+    type: OperationActionsTypes = OperationActionsTypes.REMOVE_ALL_OPERATION;
+    constructor(public payload:any) {   
+    }   
+}
+
+export type OperationsActions = AddOperationAction | RemoveOperationAction | RemoveAllOperationAction;

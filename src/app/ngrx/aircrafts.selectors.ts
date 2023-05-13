@@ -32,3 +32,10 @@ export const selectIsConnected = createSelector(
     return state.isConnected;
   }
 );
+
+export const selectEntities = createSelector(
+  createFeatureSelector('airbusState'),  
+  (state: AircraftsState) => {
+    return state.entities;
+  }
+);

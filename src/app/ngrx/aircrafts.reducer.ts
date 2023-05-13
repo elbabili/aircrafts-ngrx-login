@@ -23,7 +23,8 @@ export const initialState: AircraftsState = adapter.getInitialState({
     isConnected : false,
     ids: [],
     entities: {},
-    aircraft: {} as Aircraft
+    aircraft: {} as Aircraft,
+    equipments: []
 });
 
 export function AircraftsReducer(state : AircraftsState = initialState, action:Action) : AircraftsState {   
@@ -37,13 +38,20 @@ export function AircraftsReducer(state : AircraftsState = initialState, action:A
         case AircraftsActionsTypes.GET_ALL_AIRCRAFTS_ERROR : 
             return {...state, dataState:AircraftsStateEnum.ERROR, errorMessage:(<AircraftsActions> action).payload}
 
+        //Get All Equiments
+        case AircraftsActionsTypes.GET_ALL_EQUIPMENTS:     
+            return {...state, dataState:AircraftsStateEnum.LOADING }  
+        case AircraftsActionsTypes.GET_ALL_EQUIPMENTS_SUCCESS: 
+            return {...state, dataState:AircraftsStateEnum.LOADED, equipments:(<AircraftsActions> action).payload}
+        case AircraftsActionsTypes.GET_ALL_EQUIPMENTS_ERROR : 
+            return {...state, dataState:AircraftsStateEnum.ERROR, errorMessage:(<AircraftsActions> action).payload}
+
         //Get Aircraft By Id
         case AircraftsActionsTypes.GET_AIRCRAFT_BY_ID:     
             return {...state, dataState:AircraftsStateEnum.LOADING }   
         case AircraftsActionsTypes.GET_AIRCRAFT_BY_ID_SUCCESS: 
-        // Action a été reçu par l'effect qui a fait une demande en base, reçoit les datas et génère l'action pour indiquer que tout est ok
             return {...state, dataState:AircraftsStateEnum.LOADED, aircraft:(<AircraftsActions> action).payload}
-        // renvoi clone + nouveau dataState + avion en base contenu dans le payload
+        // renvoi clone + nouveau dataState + avion en base à partir de l'id
         case AircraftsActionsTypes.GET_AIRCRAFT_BY_ID_ERROR : 
             return {...state, dataState:AircraftsStateEnum.ERROR, errorMessage:(<AircraftsActions> action).payload}
         
@@ -75,7 +83,9 @@ export function AircraftsReducer(state : AircraftsState = initialState, action:A
         case OperationActionsTypes.ADD_OPERATION :
             return adapter.addOne((<AircraftsActions> action).payload, state);
         case OperationActionsTypes.REMOVE_OPERATION :
-            return adapter.removeOne((<AircraftsActions> action).payload.id, state);
+            return adapter.removeOne((<AircraftsActions> action).payload, state);
+        case OperationActionsTypes.REMOVE_ALL_OPERATION :
+            return adapter.removeAll(state);
 
          // Login ou demande d'authenfication
         case LoginActionsTypes.LOGIN :

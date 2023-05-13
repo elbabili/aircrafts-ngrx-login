@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, Observable, tap } from 'rxjs';
 import { Aircraft } from 'src/app/model/aircraft.model';
-import { GetAircraftByIdAction } from 'src/app/ngrx/aircrafts.actions';
+import { GetAircraftByIdAction, GetAllEquipmentsAction, RemoveAllOperationAction } from 'src/app/ngrx/aircrafts.actions';
 import { selectCountAlertAircrafts, selectIsConnected } from 'src/app/ngrx/aircrafts.selectors';
 import { AircraftsState, AircraftsStateEnum } from 'src/app/ngrx/aircrafts.state';
 
@@ -33,6 +33,7 @@ export class AircraftsComponent implements OnInit {
 
   onDetailAircraft(aircraft : Aircraft){
     this.store.dispatch(new GetAircraftByIdAction(aircraft.id));
+    this.store.dispatch(new GetAllEquipmentsAction({}));
     this.router.navigateByUrl('aircraft/' + aircraft.id);
   }
 }

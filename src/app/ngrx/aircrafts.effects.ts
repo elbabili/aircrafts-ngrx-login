@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, mergeMap, Observable, of } from "rxjs";
 import { AircraftService } from "../services/aircraft.service";
 import { AuthenticateService } from "../services/authenticate.service";
-import { AircraftsActions, AircraftsActionsTypes, GetAircraftByIdActionError, GetAircraftByIdActionSuccess, GetAllAircraftsActionError, GetAllAircraftsActionSuccess, GetDesignedAircraftsActionError, GetDesignedAircraftsActionSuccess, GetDevelopmentAircraftsActionError, GetDevelopmentAircraftsActionSuccess, SearchAircraftsActionError, SearchAircraftsActionSuccess } from "./aircrafts.actions";
+import { AircraftsActions, AircraftsActionsTypes, GetAircraftByIdActionError, GetAircraftByIdActionSuccess, GetAllAircraftsActionError, GetAllAircraftsActionSuccess, GetAllEquipmentsActionError, GetAllEquipmentsActionSuccess, GetDesignedAircraftsActionError, GetDesignedAircraftsActionSuccess, GetDevelopmentAircraftsActionError, GetDevelopmentAircraftsActionSuccess, SearchAircraftsActionError, SearchAircraftsActionSuccess } from "./aircrafts.actions";
 
 @Injectable()  //décorateur spéficie qu'il s'agit d'un service
 export class AircraftsEffects {
@@ -68,6 +68,18 @@ export class AircraftsEffects {
                 return this.aircraftService.getAircraftById(action.payload).pipe(
                     map((aircraft) => new GetAircraftByIdActionSuccess(aircraft)),
                     catchError((err) => of(new GetAircraftByIdActionError(err.message)))
+                )
+            })
+        )
+    );
+
+    getAllEquipmentsEffect: Observable<AircraftsActions> = createEffect(
+        () => this.effectActions.pipe(
+            ofType(AircraftsActionsTypes.GET_ALL_EQUIPMENTS),
+            mergeMap((action: AircraftsActions) => {
+                return this.aircraftService.getEquipments().pipe(
+                    map((equipments) => new GetAllEquipmentsActionSuccess(equipments)),
+                    catchError((err) => of(new GetAllEquipmentsActionError(err.message)))
                 )
             })
         )

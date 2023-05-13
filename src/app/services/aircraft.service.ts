@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Aircraft } from '../model/aircraft.model';
+import { Equipment } from '../model/equipment.model';
 
 @Injectable({providedIn: 'root'})  //Service + accessible dans toute l'appli
 
@@ -36,5 +37,9 @@ export class AircraftService {
   //renvoi la liste d'avions contenant le mot clé
   public getAircraftsByKeyword(keyword:string) : Observable<Aircraft[]> {
     return this.http.get<Aircraft[]>(environment.host + "/aircrafts?prog_like=" + keyword)
+  }
+
+  public getEquipments():Observable<Equipment[]> {
+    return this.http.get<Equipment[]>(environment.host + "/equipments");
   }
 }
