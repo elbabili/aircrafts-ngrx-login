@@ -34,7 +34,7 @@ export class AircraftComponent implements OnInit {
     console.log(aircraft);
     console.log(state.entities);
     //dispatcher l'action qui permettra de mettre à jour l'api avec les nouvelles données
-    this.store.dispatch(new RemoveAllOperationAction({}));
+    this.store.dispatch(new RemoveAllOperationAction({}));  
     this.router.navigateByUrl('aircrafts');
   }
 
