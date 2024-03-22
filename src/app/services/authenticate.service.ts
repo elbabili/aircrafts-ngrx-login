@@ -13,6 +13,6 @@ export class AuthenticateService {
 
   //renvoi un utilisateur en base
   public login(user:any) : Observable<User> {
-    return this.http.get<User>(environment.host + "/users?email="+user.email+"&pwd="+user.pwd);
+    return this.http.get<User>(environment.host + "/users?email=" + user.email + "&pwd=" + user.pwd);
   }
 }

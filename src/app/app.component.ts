@@ -20,7 +20,7 @@ export class AppComponent {
     
   constructor(private store:Store<any>, private router: Router) {
     this.isConnected$ = store.select(selectIsConnected);
-    //new Laboratory().tests();
+    //new Laboratory().testTab();
   }
 
   ngOnInit(): void { 

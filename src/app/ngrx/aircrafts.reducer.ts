@@ -3,10 +3,10 @@ import { Action, State } from "@ngrx/store"
 import { AircraftsActions, AircraftsActionsTypes, OperationActionsTypes } from "./aircrafts.actions";
 import { createEntityAdapter, EntityAdapter } from "@ngrx/entity";
 import { Operation } from "../model/operation.model";
-import { User } from "../model/user.model";
 import { LoginActionsTypes } from "./login/login.action";
 import { LogoutActionsTypes } from "./login/logout.action";
 import { Aircraft } from "../model/aircraft.model";
+import { UpdateActionsTypes } from "./update-aircraft/update.action";
 
 export const adapter: EntityAdapter<Operation> = createEntityAdapter<Operation>({
     //on a besoin d'un adapter afin de manipuler nos entités avec un certain nombre de méthodes
@@ -19,7 +19,6 @@ export const initialState: AircraftsState = adapter.getInitialState({
     errorMessage: "",
     dataState: AircraftsStateEnum.INITIAL,
     loginState: LoginStateEnum.INITIAL,
-    userConnected: {} as User,
     isConnected : false,
     ids: [],
     entities: {},
@@ -92,7 +91,7 @@ export function AircraftsReducer(state : AircraftsState = initialState, action:A
             return {...state, loginState:LoginStateEnum.INITIAL}
         case LoginActionsTypes.LOGIN_SUCCESS :
             //let isConnect = ((<AircraftsActions> action).payload==[])?false:true;
-            return {...state, loginState:LoginStateEnum.RESPONSE_LOGIN_OK, userConnected:(<AircraftsActions> action).payload, isConnected:true}
+            return {...state, loginState:LoginStateEnum.RESPONSE_LOGIN_OK, isConnected:true}
         case LoginActionsTypes.LOGIN_DENIED :
             return {...state, loginState:LoginStateEnum.RESPONSE_LOGIN_DENIED, isConnected:false}
         case LoginActionsTypes.LOGIN_ERROR :
@@ -100,11 +99,19 @@ export function AircraftsReducer(state : AircraftsState = initialState, action:A
 
         // Logout
         case LogoutActionsTypes.LOGOUT :
-            return {...state, loginState:LoginStateEnum.INITIAL, userConnected:{} as User, isConnected:false}
+            return {...state, loginState:LoginStateEnum.INITIAL, isConnected:false}
         case LogoutActionsTypes.LOGOUT_SUCCESS :
             //on peut imaginer ici la communication avec l'api indiquant que l'utilisateur a bien été connecté avec une session ouverte sur le serveur
         case LogoutActionsTypes.LOGOUT_ERROR :
             return {...state, loginState:LoginStateEnum.ERROR, errorMessage:(<AircraftsActions> action).payload}
+
+        // Update Aircraft
+        case UpdateActionsTypes.UPDATE :
+            return {...state}
+        case UpdateActionsTypes.UPDATE_SUCCESS : 
+            return {...state, aircraft:(<AircraftsActions> action).payload }
+        case UpdateActionsTypes.UPDATE_ERROR :
+            return {...state, errorMessage:(<AircraftsActions> action).payload }
     
         default : 
             return {...state} 

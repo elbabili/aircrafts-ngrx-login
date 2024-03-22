@@ -15,7 +15,7 @@ export class LoginEffects {
             mergeMap((action: LoginsActions) => {           
                 return this.authService.login(action.payload).pipe(
                     map((user) => {    
-                        return (Object.keys(user).length == 0) ? new LoginActionDenied(null) : new LoginActionSuccess(user);
+                        return (Object.keys(user).length == 0) ? new LoginActionDenied(null) : new LoginActionSuccess(null);
                     }), 
                     catchError((err) => of(new LoginActionError(err.message)))
                 )

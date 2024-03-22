@@ -42,4 +42,9 @@ export class AircraftService {
   public getEquipments():Observable<Equipment[]> {
     return this.http.get<Equipment[]>(environment.host + "/equipments");
   }
+
+  public putAircraft(aircraft : Aircraft) : Observable<Aircraft> {        
+    return this.http.put<Aircraft>(environment.host+"/aircrafts/" + aircraft.id , aircraft);
+  }
+
 }

@@ -12,6 +12,7 @@ import { AircraftsState, AircraftsStateEnum } from 'src/app/ngrx/aircrafts.state
   templateUrl: './aircrafts.component.html',
   styleUrls: ['./aircrafts.component.css']
 })
+
 export class AircraftsComponent implements OnInit {
   aircraftsState$:Observable<AircraftsState> | null = null; 
   readonly aircraftsStateEnum = AircraftsStateEnum;

@@ -1,7 +1,6 @@
 import { EntityState } from "@ngrx/entity";
 import { Aircraft } from "../model/aircraft.model";
 import { Operation } from "../model/operation.model";
-import { User } from "../model/user.model";
 import { Equipment } from "../model/equipment.model";
 
 export enum AircraftsStateEnum{  // les différents états du state
@@ -18,12 +17,13 @@ export enum LoginStateEnum{
     INITIAL = "Initial"     //état initial
 }
 
+
+
 export interface AircraftsState extends EntityState<Operation> {    //structure de notre STATE
     aircrafts : Aircraft[],           //liste d'avions qui s'affichent
     errorMessage:string,              //un message d'erreur
     dataState : AircraftsStateEnum,   //état du state s'agissant des avions
     loginState : LoginStateEnum,      //état du state s'agissant de l'authentification
-    userConnected : User,             //utilisateur connecté
     isConnected : boolean,
     aircraft : Aircraft,
     equipments : Equipment[]
@@ -35,7 +35,6 @@ export const initState : AircraftsState = {
     errorMessage: "",
     dataState: AircraftsStateEnum.INITIAL,
     loginState: LoginStateEnum.INITIAL,
-    userConnected : {} as User,
     isConnected : false,
     ids: [],
     entities: {},

@@ -2,7 +2,15 @@ import { filter, from, map, Observable, of, tap } from 'rxjs';
 
 import { Aircraft } from '../model/aircraft.model';
 
+
+enum DataStateEnum {
+  LOADING,
+  LOADED
+}
+
 export class Laboratory {
+
+  readonly dataStateEnum = DataStateEnum;
 
   //fonction classique
   classique(): void {
@@ -17,7 +25,35 @@ export class Laboratory {
   sum = (x: number, y: number): number => { return x + y; }   //accolades non indispensable car une seule instruction
   display = () => console.log("hello world");   //prend pas d'argument et affiche hello
 
+  testTab() : void {
+    let tab = [
+      {
+        "id": 1,
+        "name": "Compas",
+        "category": "navigation",
+        "price": 5000
+      },
+      {
+        "id": 2,
+        "name": "Gps",
+        "category": "navigation",
+        "price": 10000
+      },
+      {
+        "id": 3,
+        "name": "Indic Vitesse",
+        "category": "pilotage",
+        "price": 7500
+      }
+    ]
+    console.log(tab);
+
+    for(let eq of tab)
+      console.log(eq);
+  }
+
   tests(): void {
+
     this.classique();
     this.somme(5, 7); // 12 -> affiche rien !
     console.log(this.sum(10, 20));  // 30
@@ -34,12 +70,13 @@ export class Laboratory {
 
     let tab = [
       "Si vous êtes ici, c'est parce que c'est pas clair les fonctions fléchées",
-      "Rassurez vous, ça devrait aller mieux d'ici peu ;)"
+      "Rassurez vous, ça devrait aller mieux d'ici peu ;)",
+      "coucou"
     ];
     //les 2 approches renvoient dans un tableau le nombre de caractères par ligne de notre tableau tab
     let tab2 = tab.map(function (s) { return s.length }); //sans les fonctions fléchées
-    let val = tab.map(s => s.length); // avec ... moins verbeux n'est-ce pas ? faut juste s'habituer
-    console.log("nombre de caractères par lignes dans le tableau : \n" + tab + " est " + val)
+    let tab3 = tab.map(s => s.length); // avec ... moins verbeux n'est-ce pas ? faut juste s'habituer
+    console.log("nombre de caractères par lignes dans le tableau : \n" + tab + " est " + tab3)
 
     //Surcharge de fonction ... 
 
@@ -76,7 +113,7 @@ export class Laboratory {
       dis => console.log('hi ' + dis)
     );
 
-    //of crée un Observable sur une liste de chiffres qui passent par un tuyau qui filtre(pair) puis modifie les datas avec map
+    //of crée un Observable sur une liste de chiffres qui passent par un pipeline qui filtre(pair) puis modifie les datas avec map
     //avant de renvoyer un observable auquel il faut souscrire si on veut avoir un affichage
     const ob$: Observable<number> = of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10).pipe(filter( v => v % 2 === 0), map( v => v * 10));
     ob$.subscribe(
