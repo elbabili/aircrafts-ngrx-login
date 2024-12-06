@@ -11,6 +11,7 @@ export class AircraftsNavbarComponent implements OnInit {
   constructor(private store:Store<any>) { //injection du store en spécifiant ou pas le type du state
   }
   ngOnInit(): void {
+    this.getAllAircrafts();
   }
   getAllAircrafts(){
     //User a cliqué sur le bouton afficher tous les avions aussi il faut dispatcher l'action à l'aide du store

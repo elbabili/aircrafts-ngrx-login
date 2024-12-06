@@ -26,8 +26,10 @@ export class AircraftComponent implements OnInit,OnDestroy {
   ngOnInit(): void {
     this.aircraftsState$ = this.store.pipe(
       map((state) => {
-        Object.assign(this.aircraft,state.airbusState.aircraft);    //afin de ne pas altérer la source
+        Object.assign(this.aircraft,state.airbusState.aircraft);   
         Object.assign(this.equipments,this.aircraft.equipments);
+        //this.aircraft = { ...state.airbusState.aircraft }; 
+        //this.equipments = [...this.aircraft.equipments];  
         return state.airbusState;
       })
     );  
@@ -41,8 +43,7 @@ export class AircraftComponent implements OnInit,OnDestroy {
     //dispatcher l'action qui permettra de mettre à jour l'api avec les nouvelles données        
     aircraft.equipments = Object.values(state.entities);
     this.store.dispatch(new UpdateAircraftAction(aircraft))
-    this.store.dispatch(new RemoveAllOperationAction(null));
-    this.router.navigateByUrl('aircrafts');
+    this.router.navigate(['aircrafts']);
   }
 
   onAddEquipement(equipment : Equipment) {

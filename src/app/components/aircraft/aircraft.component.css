@@ -1,0 +1,44 @@
+.container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  h2, h4 {
+    color: #003366; /* Bleu foncé */
+  }
+  
+  .text-primary {
+    color: #0056b3 !important; /* Bleu clair */
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #e3f2fd; /* Légère teinte bleue */
+  }
+  
+  .table-dark {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  .btn-outline-primary {
+    border-color: #0056b3;
+    color: #0056b3;
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+  
+  .btn-outline-danger {
+    border-color: #d9534f;
+    color: #d9534f;
+  }
+  
+  .btn-outline-danger:hover {
+    background-color: #d9534f;
+    color: white;
+  }
+  

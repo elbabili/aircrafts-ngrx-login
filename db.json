@@ -3,9 +3,33 @@
     {
       "id": 1,
       "prog": "A350",
-      "design": false,
+      "design": true,
       "development": true,
       "equipments": [
+        {
+          "id": 1,
+          "name": "Compas",
+          "category": "navigation",
+          "price": 5000
+        },
+        {
+          "id": 2,
+          "name": "Gps",
+          "category": "navigation",
+          "price": 10000
+        },
+        {
+          "id": 3,
+          "name": "Indic Vitesse",
+          "category": "pilotage",
+          "price": 7500
+        },
+        {
+          "id": 4,
+          "name": "Indic Altitude",
+          "category": "pilotage",
+          "price": 3500
+        },
         {
           "id": 5,
           "name": "Altimètre",
@@ -30,7 +54,7 @@
       "id": 2,
       "prog": "A320",
       "design": true,
-      "development": true,
+      "development": false,
       "equipments": []
     },
     {
@@ -38,28 +62,46 @@
       "prog": "A380",
       "design": true,
       "development": true,
-      "equipments": {}
+      "equipments": []
     },
     {
       "id": 4,
       "prog": "A400M",
       "design": false,
       "development": false,
-      "equipments": [
-        {
-          "id": 7,
-          "name": "Sys anti collision",
-          "category": "environnement de vol",
-          "price": 50000
-        }
-      ]
+      "equipments": []
     },
     {
       "id": 5,
       "prog": "A330",
       "design": true,
       "development": true,
-      "equipments": {}
+      "equipments": [
+        {
+          "id": 1,
+          "name": "Compas",
+          "category": "navigation",
+          "price": 5000
+        },
+        {
+          "id": 2,
+          "name": "Gps",
+          "category": "navigation",
+          "price": 10000
+        },
+        {
+          "id": 3,
+          "name": "Indic Vitesse",
+          "category": "pilotage",
+          "price": 7500
+        },
+        {
+          "id": 4,
+          "name": "Indic Altitude",
+          "category": "pilotage",
+          "price": 3500
+        }
+      ]
     }
   ],
   "users": [

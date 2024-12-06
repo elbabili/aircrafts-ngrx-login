@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.aircraftsState$ = this.store.pipe(
       map((state) => { 
-        if(state.airbusState.isConnected) {
+        if(state.airbusState.isConnected) {          
           this.route.navigateByUrl('aircrafts');
         }
         return state.airbusState;
@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit {
   }
 }
 
-
 /*
+
 - Réalisation d'un composant de connexion
 - Réalisation de l'action dispatché par celui-ci
 - modification du state selon les besoins

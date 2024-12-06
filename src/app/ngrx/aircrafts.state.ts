@@ -17,8 +17,6 @@ export enum LoginStateEnum{
     INITIAL = "Initial"     //état initial
 }
 
-
-
 export interface AircraftsState extends EntityState<Operation> {    //structure de notre STATE
     aircrafts : Aircraft[],           //liste d'avions qui s'affichent
     errorMessage:string,              //un message d'erreur
